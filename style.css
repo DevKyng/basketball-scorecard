@@ -1,0 +1,164 @@
+:root {
+    color-scheme: dark;
+    --page-background: #080001;
+    --card-background: #1b244a;
+    --score-background: #080001;
+    --accent: #f94f6d;
+    --text: #ffffff;
+    --muted-text: #c7c9d6;
+    --border: rgba(255, 255, 255, 0.12);
+    --shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+    background:
+        radial-gradient(circle at top, rgba(27, 36, 74, 0.9), transparent 45%),
+        var(--page-background);
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+.scoreboard {
+    width: min(100%, 44rem);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        "home guest"
+        "reset reset";
+    gap: 2rem;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, #222d5b, var(--card-background));
+    box-shadow: var(--shadow);
+}
+
+.team {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+}
+
+.team h1,
+.team .score {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+}
+
+.team button {
+    display: inline-block;
+}
+
+.team:first-child {
+    grid-area: home;
+}
+
+.team:last-of-type {
+    grid-area: guest;
+}
+
+.team h1 {
+    margin: 0 0 1rem;
+    color: var(--muted-text);
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.score {
+    width: 100%;
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(249, 79, 109, 0.25);
+    border-radius: 0.75rem;
+    background: var(--score-background);
+    color: var(--accent);
+    font-family: monospace;
+    font-size: clamp(3.5rem, 10vw, 5rem);
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    box-shadow: inset 0 0 1.5rem rgba(249, 79, 109, 0.08);
+}
+
+.team button,
+#reset-button {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+}
+
+.team button {
+    min-width: 3.25rem;
+    margin: 0.2rem;
+    padding: 0.55rem 0.75rem;
+}
+
+.team button:hover,
+.team button:focus-visible {
+    border-color: var(--accent);
+    background: rgba(249, 79, 109, 0.14);
+    color: var(--accent);
+}
+
+.team button:active,
+#reset-button:active {
+    transform: translateY(1px);
+}
+
+#reset-button {
+    grid-area: reset;
+    grid-column: 1 / -1;
+    justify-self: center;
+    min-width: 8rem;
+    margin-top: 0.25rem;
+    padding: 0.7rem 1.25rem;
+    background: var(--text);
+    color: var(--page-background);
+}
+
+#reset-button:hover,
+#reset-button:focus-visible {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--text);
+}
+
+button:focus-visible {
+    outline: 3px solid rgba(249, 79, 109, 0.4);
+    outline-offset: 3px;
+}
+
+@media (max-width: 30rem) {
+    .scoreboard {
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .team button {
+        min-width: 2.75rem;
+        padding-inline: 0.5rem;
+    }
+}
